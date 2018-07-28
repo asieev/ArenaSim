@@ -1,0 +1,19 @@
+1 Open the Graves (M19) 112
+1 Gravewaker (M19) 293
+2 Death Baron (M19) 90
+1 Meteor Golem (M19) 241
+1 Rise from the Grave (M19) 117
+1 Yargle, Glutton of Urborg (DAR) 113
+2 Diregraf Ghoul (M19) 92
+2 Gravedigger (AKH) 93
+2 Hired Blade (M19) 100
+2 Infectious Horror (M19) 101
+2 Skulduggery (XLN) 123
+2 Skymarch Bloodletter (XLN) 124
+2 Strangling Spores (M19) 122
+2 Vampire Sovereign (M19) 125
+3 Deathbloom Thallid (DAR) 84
+3 Doomed Dissenter (AKH) 87
+3 Murder (M19) 110
+3 Walking Corpse (M19) 126
+25 Swamp (KLD) 256

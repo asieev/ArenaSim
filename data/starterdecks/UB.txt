@@ -1,0 +1,32 @@
+1 Bone Dragon (M19) 88
+1 Tetzimoc, Primal Death (RIX) 86
+1 Hostage Taker (XLN) 223
+1 Blink of an Eye (DAR) 46
+2 Cancel (AKH) 44
+2 Essence Scatter (AKH) 52
+2 Evolving Wilds (AKH) 242
+1 Field of Ruin (XLN) 254
+1 Golden Demise (RIX) 73
+1 In Bolas's Clutches (DAR) 54
+2 Opt (XLN) 65
+4 Submerged Boneyard (AER) 194
+1 Negate (AER) 40
+1 Treasure Map (XLN) 250
+1 Josu Vess, Lich Knight (DAR) 95
+2 Syncopate (DAR) 67
+2 Memorial to Genius (DAR) 243
+1 Weight of Memory (DAR) 74
+2 Cast Down (DAR) 81
+1 Eviscerate (DAR) 91
+1 Secrets of the Golden City (RIX) 52
+1 Hornswoggle (RIX) 39
+1 Ravenous Chupacabra (RIX) 82
+1 Drowned Catacomb (XLN) 253
+1 Icy Manipulator (DAR) 219
+1 Air Elemental (XLN) 45
+2 Murder (M19) 110
+2 Sift (M19) 72
+2 Psychic Symbiont (M19) 221
+2 Omenspeaker (M19) 64
+7 Island (KLD) 253
+9 Swamp (KLD) 256
