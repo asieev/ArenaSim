@@ -38,6 +38,32 @@ function deckreader_mtga_format(file)
     ans
 end
 
+function deckreader_mtgo_format(file; strip_sideboard = false)
+    lines = readlines(file)
+    if strip_sideboard
+        sideboard_header = findfirst(occursin.(Ref(r"^\s*Sideboard\s*$|^\s*$"), lines))
+        lines = lines[1:(sideboard_header-1)]
+    end
+    filter!(x -> occursin(r"^\s*\d+", x), lines)
+    matches = eachmatch.(Ref(r"\s"), lines)
+    matches = map(x -> [y.offset for y in x], matches)
+    end_of_name = [ length(l) for l in lines]
+    end_of_count = first.(matches)
+
+    count = [ parse_max_4(lines[i][1:(end_of_count[i])]) for i in eachindex(lines) ]
+    name = [ String(strip(lines[i][end_of_count[i]:end_of_name[i]])) for i in eachindex(lines) ]
+
+
+    ans = collect(zip(name, count))
+    filter!(x -> !in(x[1], ["Plains", "Island", "Swamp", "Mountain", "Forest"]), ans )
+    for (i, elem) in pairs(ans)
+        if haskey(multicard_synonyms, elem[1])
+            ans[i] = (multicard_synonyms[elem[1]], elem[2])
+        end
+    end
+    ans
+end
+
 function deckreader_tsv(file)
     lines = readlines(file)
     filter!( x -> occursin(r"^\s*\d+", x), lines)

@@ -1,6 +1,6 @@
 export card_db
 
-const card_db =  eval(Meta.parse(read("data/card_db.txt", String)))
+const card_db =  eval(Meta.parse(read(joinpath(@__DIR__,"..", "data", "card_db.txt"), String)))
 
 ## Decklists often don't have the full name of flip cards
 ## Add some synonyms
@@ -12,12 +12,18 @@ function splitter(x)
     String(strip(x[1:(offset-1)]))
 end
 
-function three_parens(x)
+function three_slashes(x)
     ans = replace(x, r" // " => " /// ")
+    ans
+end
+
+function one_slash(x)
+    ans = replace(x, r" // " => "/")
     ans
 end
 
 const multicard_synonyms  = Dict( (splitter(x["name"]), x["name"]) for x in multicards)
 for x in multicards
-    multicard_synonyms[three_parens(x["name"])] = x["name"]
+    multicard_synonyms[three_slashes(x["name"])] = x["name"]
+    multicard_synonyms[one_slash(x["name"])] = x["name"]
 end

@@ -1,0 +1,16 @@
+4 Aether Hub (KLD) 242
+4 Aethersphere Harvester (AER) 142
+4 Bomat Courier (KLD) 199
+4 Chandra, Torch of Defiance (KLD) 110
+4 Disallow (AER) 31
+4 Fatal Push (AER) 57
+4 Fumigate (KLD) 15
+4 Glint-Sleeve Siphoner (AER) 62
+4 Heart of Kiran (AER) 153
+4 Pia Nalaar (KLD) 124
+4 Scrapheap Scrounger (KLD) 231
+4 Spire of Industry (AER) 184
+4 Torrential Gearhulk (KLD) 67
+4 Unlicensed Disintegration (KLD) 187
+4 Walking Ballista (AER) 181
+
