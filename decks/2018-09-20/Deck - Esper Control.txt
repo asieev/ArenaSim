@@ -1,0 +1,30 @@
+2 Cast Down
+4 Disallow
+4 Drowned Catacomb
+3 Essence Scatter
+4 Fatal Push
+4 Fetid Pools
+1 Field of Ruin
+1 Forsake the Worldly
+3 Glacial Fortress
+4 Glimmer of Genius
+3 Irrigated Farmland
+4 Island
+4 Isolated Chapel
+1 Negate
+1 Search for Azcanta
+4 Swamp
+2 Syncopate
+3 Teferi, Hero of Dominaria
+4 Torrential Gearhulk
+4 Vraska's Contempt
+
+2 Bontu's Last Reckoning
+1 Chromium, the Mutable
+1 Detection Tower
+1 Duress
+4 Glint-Sleeve Siphoner
+2 Infernal Reckoning
+2 Jace's Defeat
+1 Negate
+1 Vizier of Many Faces
