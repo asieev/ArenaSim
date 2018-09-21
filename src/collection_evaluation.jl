@@ -34,32 +34,40 @@ function can_finish_deck(collection, account, current_deck)
 end
 
 function spend_wildcards!(; account, collection, current_deck, output, rep,
-     deckindex, logging_vector)
+     deckindex, logging_vector, parameters, openable_cards)
     for elem in current_deck
         r = minimum(x -> x.rarity, elem.prints)
         i = elem.prints[1].index
+        set = elem.prints[1].set
         while (account.wc_count[r] > 0) && (elem.amount - sum_over_prints(collection, elem.prints) > 0)
             account.wc_count[r] -= 1
             output.wcs_spent_on_decks[rep,deckindex,r] += 1
             collection[i] += 1
+            if collection[i] >= 4 && parameters.prevent_duplicates
+                remove_fully_collected!(i, set, r; openable_cards = openable_cards)
+            end
             push!(logging_vector, i)
         end
     end
 end
 
-function next_set!(collection, account, current_deck, sets, cards_by_set_rarity)::Symbol
+function next_set!(collection, account, current_deck, sets, openable_cards)::Symbol
     for set in sets
         if account.bonus_packs[set] > 0
             return set
         end
     end
 
-    count_sets_with_high_rarity!(set_counter, collection, current_deck, cards_by_set_rarity )
+    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards.by_set_rarity )
     argmax(set_counter)
 end
 
-function next_set_m19!(collection, account, current_deck, sets, cards_by_set_rarity)::Symbol
+function next_set_m19!(collection, account, current_deck, sets, openable_cards)::Symbol
     :M19
+end
+
+function next_set_dom!(collection, account, current_deck, sets, openable_cards)::Symbol
+    :DOM
 end
 
 function count_sets_with_high_rarity!(d::Dict{Symbol,Float64}, collection, deck, length_lookup)

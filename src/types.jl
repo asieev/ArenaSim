@@ -27,8 +27,14 @@ Parameters to adjust certain aspects of the simulation:
     duplicate_vpct::NTuple{4,Float64} = (1/9, 1/3, 5/9, 1+1/9)
     noopen_cards::Vector{Int} = map(x -> first(x.prints).index, deckinfo(deckreader_mtga_format(joinpath(@__DIR__, "..", "data", "noopen_cards.txt"))))
     starter_cards::Vector{Int} = startercards
-    bonus_packs::Dict{Symbol,Int} = Dict( :M19 => 15 )
+    bonus_packs::Dict{Symbol,Int} = Dict( :M19 => 3 )
     nextset::Function = next_set!
+    wc_upgrade_rate::Vector{Float64} = [Inf,Inf,Inf,Inf]
+    wc_upgrade_threshold::Vector{Int} = [20,20,100,0]
+    welcome_bundle::Bool = false
+    kaladesh_grant::Bool = false
+    prevent_duplicates::Bool = false
+    starting_wc_count::Vector{Int} = [4,2,1,0]
 end
 
 """
@@ -40,10 +46,23 @@ for pack-based wildcards, and the position on the wildcard timer tracks
 """
 @with_kw mutable struct AccountState
     vault_pct::Float64 = 0.0
-    wc_count::Vector{Int} = [4,2,1,0]
+    wc_count::Vector{Int} = [0,0,0,0]
     bonus_packs::Dict{Symbol,Int} = Dict( (s, 0) for s in sets)
     pitytimer::Vector{Int} = [0,0,0,0]
     wc_timer::Cycle{Int} = Cycle(SimParameters().wc_timer_track, 0)
+end
+
+function AccountState(parameters::SimParameters)
+    account = AccountState()
+    account.wc_count = deepcopy(parameters.starting_wc_count)
+
+    for set in keys(parameters.bonus_packs)
+        account.bonus_packs[set] += parameters.bonus_packs[set]
+    end
+
+    account.wc_timer = Cycle(parameters.wc_timer_track, 0)
+
+    account
 end
 
 """

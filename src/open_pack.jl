@@ -49,12 +49,20 @@ function wcdraw!(account, pars::PityTimerParameters)::Tuple{Int64,Int64,Int64}
 end
 
 function open_pack!(pack_contents; set,  collection, pitytimer_parameters, account,
-     draw_table, parameters, logging_vector, output, rep)
+     openable_cards, parameters, logging_vector, output, rep)
 
     common_wc, uncommon_wc, rareslot = wcdraw!(account, pitytimer_parameters)
 
     for r in 1:4
-        rand!(pack_contents[r], draw_table[(set,r)])
+        if !isempty(openable_cards.by_set_rarity[(set,r)])
+            rand!(pack_contents[r], openable_cards.by_set_rarity[(set,r)])
+        else
+            fill!(pack_contents[r], 0)
+            if r == 1 || r == 2 || (r == 3 && rareslot == 1) || (r == 4 && rareslot == 3)
+                length_correction = (r == 1 && common_wc == 1) || (r == 2 & uncommon_wc == 1) ? 1 : 0
+                account.vault_pct += parameters.duplicate_vpct[r] * (length(pack_contents[r]) - length_correction)
+            end
+        end
     end
 
     if common_wc == 1
@@ -83,21 +91,25 @@ function open_pack!(pack_contents; set,  collection, pitytimer_parameters, accou
         output.total_pack_wcs[rep,4] += 1
     end
 
-    pack_to_collection!(collection; pack_contents = pack_contents,
-     account = account, parameters = parameters, logging_vector = logging_vector)
+    pack_to_collection!(collection; pack_contents = pack_contents, set = set,
+     account = account, parameters = parameters, logging_vector = logging_vector, openable_cards = openable_cards)
 
      output.total_packs[rep] += 1
 
 end
 
 function pack_to_collection!(collection; pack_contents, account,
-     parameters, logging_vector)
+     parameters, logging_vector, openable_cards, set)
     for r in 1:4
         for card in pack_contents[r]
             if card > 0
                 if collection[card] < 4
                     collection[card] += 1
                     push!(logging_vector, card)
+
+                    if collection[card] >= 4 && parameters.prevent_duplicates
+                        remove_fully_collected!(card, set, r; openable_cards = openable_cards )
+                    end
                 else
                     account.vault_pct += parameters.duplicate_vpct[r]
                 end
