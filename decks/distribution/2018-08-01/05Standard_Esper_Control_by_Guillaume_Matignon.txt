@@ -1,0 +1,33 @@
+1 Arch of Orazca
+4 Drowned Catacomb
+4 Fetid Pools
+1 Field of Ruin
+3 Glacial Fortress
+3 Irrigated Farmland
+4 Island
+3 Isolated Chapel
+4 Swamp
+4 Torrential Gearhulk
+4 Disallow
+3 Essence Scatter
+4 Fatal Push
+4 Glimmer of Genius
+2 Hieroglyphic Illumination
+1 Negate
+3 Syncopate
+4 Vraska's Contempt
+1 Search for Azcanta
+3 Teferi, Hero of Dominaria
+Sideboard
+1 Essence Scatter
+2 Negate
+1 Cast Down
+1 Detection Tower
+1 Duress
+1 Forsake the Worldly
+1 Glint-Sleeve Siphoner
+2 Infernal Reckoning
+1 Jace's Defeat
+1 Mystic Archaeologist
+1 The Scarab God
+2 Walking Ballista

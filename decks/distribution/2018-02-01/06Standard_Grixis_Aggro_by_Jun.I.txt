@@ -1,0 +1,31 @@
+4 Aether Hub
+4 Canyon Slough
+4 Dragonskull Summit
+3 Drowned Catacomb
+2 Fetid Pools
+1 Island
+2 Mountain
+4 Spirebluff Canal
+1 Swamp
+4 Dusk Legion Zealot
+4 Glint-Sleeve Siphoner
+2 Glorybringer
+4 Rekindling Phoenix
+3 The Scarab God
+3 Whirler Virtuoso
+3 Abrade
+3 Fatal Push
+2 Harnessed Lightning
+2 Magma Spray
+3 Vraska's Contempt
+2 Chandra, Torch of Defiance
+Sideboard
+1 Abrade
+1 Vraska's Contempt
+1 Chandra, Torch of Defiance
+1 Arguel's Blood Fast
+1 Chandra's Defeat
+4 Duress
+2 Gonti, Lord of Luxury
+2 Lost Legacy
+2 Sweltering Suns
