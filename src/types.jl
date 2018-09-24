@@ -27,14 +27,14 @@ Parameters to adjust certain aspects of the simulation:
     duplicate_vpct::NTuple{4,Float64} = (1/9, 1/3, 5/9, 1+1/9)
     noopen_cards::Vector{Int} = map(x -> first(x.prints).index, deckinfo(deckreader_mtga_format(joinpath(@__DIR__, "..", "data", "noopen_cards.txt"))))
     starter_cards::Vector{Int} = startercards
-    bonus_packs::Dict{Symbol,Int} = Dict( :M19 => 3 )
+    bonus_packs::Dict{Symbol,Int} = Dict( :M19 => 13, :DOM => 7 )
     nextset::Function = next_set!
     wc_upgrade_rate::Vector{Float64} = [Inf,Inf,Inf,Inf]
     wc_upgrade_threshold::Vector{Int} = [20,20,100,0]
     welcome_bundle::Bool = false
     kaladesh_grant::Bool = false
     prevent_duplicates::Bool = false
-    starting_wc_count::Vector{Int} = [4,2,1,0]
+    starting_wc_count::Vector{Int} = [0,0,0,0]
 end
 
 """
@@ -95,17 +95,19 @@ Summarizes simulation output in terms of:
     wcs_spent_on_decks::Array{Int,3}
     card_sources::Array{Float64, 4}
     total_pack_wcs::Array{Int,2}
-    total_packs::Array{Int}
+    total_packs::Vector{Int}
+    ending_collection::Array{Int,2}
 end
 
-function SimOutput(reps::Int, decks::Int, sets::Vector{Symbol})::SimOutput
+function SimOutput(reps::Int, decks::Int, sets::Vector{Symbol}, collection::Vector{Int})::SimOutput
     SimOutput(
         packs_opened = Dict( (s, zeros(Int, (reps, decks))) for s in sets),
         wcs_from_vault = zeros(Int, (reps, 4)),
         wcs_spent_on_decks = zeros(Int, (reps, decks, 4)),
         card_sources = zeros(Float64, (reps, decks, 4, 9)),
         total_pack_wcs = zeros(Int, (reps, 4)),
-        total_packs = zeros(Int, reps)
+        total_packs = zeros(Int, reps),
+        ending_collection = zeros(Int, (reps, length(collection)))
     )
 end
 
@@ -118,6 +120,7 @@ function copy_into_output!(total::SimOutput, partial::SimOutput; startindex::Int
     total.card_sources[range,:,:,:] = partial.card_sources
     total.total_pack_wcs[range,:] = partial.total_pack_wcs
     total.total_packs[range] = partial.total_packs
+    total.ending_collection[range,:] = partial.ending_collection
 
     for set in keys(total.packs_opened)
         total.packs_opened[set][range,:] = partial.packs_opened[set]

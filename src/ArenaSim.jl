@@ -27,6 +27,7 @@ include("simulation.jl")
 include("shufflesim.jl")
 include("QC_winrate.jl")
 include("negbin.jl")
+include("icrgen.jl")
 
 
 end # module

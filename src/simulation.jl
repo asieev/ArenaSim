@@ -44,7 +44,7 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
 
     account = AccountState(parameters)
 
-    output = SimOutput(nreps, length(deckinfos), sets)
+    output = SimOutput(nreps, length(deckinfos), sets, collection)
 
     if parameters.welcome_bundle
         account.bonus_packs[:M19] += 5
@@ -199,6 +199,7 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
             cards_gained_counter!(output, overall_icrs_gained, before; rep = rep,
               deckindex = deckindex, column = 9)
         end
+        output.ending_collection[rep,:] = collection
     end
 
     output
