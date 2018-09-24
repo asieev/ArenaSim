@@ -1,0 +1,27 @@
+2 Aether Hub
+2 Canyon Slough
+4 Concealed Courtyard
+1 Dragonskull Summit
+4 Inspiring Vantage
+4 Mountain
+3 Plains
+4 Spire of Industry
+4 Bomat Courier
+4 Hazoret the Fervent
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Toolcraft Exemplar
+4 Veteran Motorist
+2 Lightning Strike
+2 Shock
+4 Unlicensed Disintegration
+2 Aethersphere Harvester
+4 Heart of Kiran
+Sideboard
+2 Authority of the Consuls
+3 Chandra, Torch of Defiance
+3 Duress
+2 Fragmentize
+1 Glorybringer
+2 Settle the Wreckage
+2 Sweltering Suns

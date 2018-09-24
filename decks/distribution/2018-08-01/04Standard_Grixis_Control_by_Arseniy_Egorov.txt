@@ -1,0 +1,39 @@
+2 Aether Hub
+3 Canyon Slough
+3 Dragonskull Summit
+3 Drowned Catacomb
+3 Fetid Pools
+1 Field of Ruin
+3 Island
+1 Mountain
+2 Spirebluff Canal
+3 Sulfur Falls
+3 Swamp
+3 Champion of Wits
+2 Nicol Bolas, the Ravager
+2 The Scarab God
+2 Torrential Gearhulk
+4 Abrade
+1 Bontu's Last Reckoning
+1 Cast Down
+1 Commit / Memory
+1 Consign / Oblivion
+1 Disallow
+1 Doomfall
+1 Essence Scatter
+2 Fatal Push
+2 Supreme Will
+2 Syncopate
+3 Vraska's Contempt
+2 Arguel's Blood Fast
+2 Liliana, Death's Majesty
+Sideboard
+1 Nicol Bolas, the Ravager
+1 Bontu's Last Reckoning
+1 Fatal Push
+1 Vraska's Contempt
+1 Angrath, the Flame-Chained
+3 Duress
+4 Glint-Sleeve Siphoner
+1 Hour of Devastation
+2 Negate

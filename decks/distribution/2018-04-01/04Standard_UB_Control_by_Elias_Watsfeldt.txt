@@ -1,0 +1,25 @@
+4 Drowned Catacomb
+4 Fetid Pools
+4 Field of Ruin
+7 Island
+7 Swamp
+2 The Scarab God
+4 Torrential Gearhulk
+2 Commit / Memory
+4 Disallow
+4 Essence Scatter
+4 Fatal Push
+3 Glimmer of Genius
+1 Hieroglyphic Illumination
+4 Moment of Craving
+4 Vraska's Contempt
+2 Arguel's Blood Fast
+Sideboard
+1 Bontu's Last Reckoning
+2 Doomfall
+2 Duress
+2 Glint-Sleeve Siphoner
+2 Golden Demise
+2 Gonti, Lord of Luxury
+2 Metallurgic Summonings
+2 Negate
