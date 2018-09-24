@@ -22,8 +22,14 @@ function one_slash(x)
     ans
 end
 
+function one_slash_with_space(x)
+    ans = replace(x, r" // " => " / ")
+    ans
+end
+
 const multicard_synonyms  = Dict( (splitter(x["name"]), x["name"]) for x in multicards)
 for x in multicards
     multicard_synonyms[three_slashes(x["name"])] = x["name"]
     multicard_synonyms[one_slash(x["name"])] = x["name"]
+    multicard_synonyms[one_slash_with_space(x["name"])] = x["name"]
 end

@@ -16,7 +16,7 @@ Simulates with batches of decks in a random order and then combines the output.
 """
 function shufflesim(decks; shuffledecks = (i,x) -> shuffle(x), parameters = SimParameters(),
      sets = sets, reps, batchsize)
-    total_ouput = SimOutput( reps * batchsize,  length( shuffledecks(1,decks) ), sets )
+    total_ouput = SimOutput( reps * batchsize,  length( shuffledecks(1,decks) ), sets, parameters.starter_cards )
 
     deckinfos = deckinfo.(decks)
 
