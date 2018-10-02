@@ -47,8 +47,8 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
     output = SimOutput(nreps, length(deckinfos), sets, collection)
 
     if parameters.welcome_bundle
-        account.bonus_packs[:M19] += 5
-        set = parameters.nextset(collection, account, first(deckinfos), sets, cards_by_set_rarity)
+        account.bonus_packs[parameters.welcome_bundle_set] += 5
+        set = next_set_welcome_bundle!(collection, account, first(deckinfos), sets, fresh_openable_cards)
         account.bonus_packs[set] += 12
     end
 
@@ -81,17 +81,13 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
         resize!(overall_pack_cards_gained, 0)
         resize!(overall_wc_crafts_gained, 0)
 
-        collection = deepcopy(parameters.starter_cards)
+        if parameters.fixed_starter
+            collection = deepcopy(parameters.starter_cards)
+        else
+            collection = deepcopy(rand(startersequences))
+        end
         openable_cards = deepcopy(fresh_openable_cards)
 
-        if parameters.kaladesh_grant
-            for i in eachindex(collection)
-                collection[i] += kldgrant[i]
-                if collection[i] > 4
-                    collection[i] = 4
-                end
-            end
-        end
         account = deepcopy(freshaccount)
 
         if parameters.prevent_duplicates
@@ -141,7 +137,14 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
 
                     # TODO: Raredrafting simulation?
 
+                    fixedpack = nextitem!(account.fixed_pack_track)
+
+                    if !ismissing(fixedpack)
+                        set = fixedpack
+                    end
+
                     push!(packs_opened, set)
+                    output.total_earned_packs[rep] += 1
                 else
                     account.bonus_packs[set] -= 1
                     push!(bonus_packs_opened, set)
@@ -170,6 +173,10 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
 
             for packset in packs_opened
                 output.packs_opened[packset][rep,deckindex] += 1
+            end
+
+            for packset in bonus_packs_opened
+                output.bonus_packs_opened[packset][rep,deckindex] += 1
             end
 
             append!(overall_icrs_gained, icrs_gained)

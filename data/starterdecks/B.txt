@@ -5,7 +5,7 @@
 1 Rise from the Grave (M19) 117
 1 Yargle, Glutton of Urborg (DAR) 113
 2 Diregraf Ghoul (M19) 92
-2 Gravedigger (AKH) 93
+2 Gravedigger (M19) 98
 2 Hired Blade (M19) 100
 2 Infectious Horror (M19) 101
 2 Skulduggery (XLN) 123
@@ -13,7 +13,7 @@
 2 Strangling Spores (M19) 122
 2 Vampire Sovereign (M19) 125
 3 Deathbloom Thallid (DAR) 84
-3 Doomed Dissenter (AKH) 87
+3 Doomed Dissenter (M19) 93
 3 Murder (M19) 110
 3 Walking Corpse (M19) 126
-25 Swamp (KLD) 256
+25 Swamp (M19) 269

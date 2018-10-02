@@ -5,7 +5,7 @@
 1 Meteor Golem (M19) 241
 1 Verdant Rebirth (XLN) 212
 2 Blanchwood Armor (M19) 169
-2 Druid of the Cowl (AER) 106
+2 Druid of the Cowl (M19) 177
 2 Elvish Rejuvenator (M19) 180
 2 Greenwood Sentinel (M19) 187
 2 Llanowar Elves (DAR) 168
@@ -16,4 +16,4 @@
 3 Highland Game (M19) 188
 3 Rabid Bite (M19) 195
 3 Titanic Growth (M19) 205
-25 Forest (KLD) 262
+25 Forest (M19) 277

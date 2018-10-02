@@ -1,0 +1,20 @@
+2 Burglar Rat
+4 Cast Down
+4 District Guide
+4 Dusk Legion Zealot
+4 Find/Finality
+9 Forest
+4 Izoni, Thousand-Eyed
+4 Jadelight Ranger
+4 Kitesail Freebooter
+4 Overgrown Tomb
+4 Ravenous Chupacabra
+4 Ritual of Soot
+5 Swamp
+4 Woodland Cemetery
+
+3 Deathgorge Scavenger
+4 Duress
+3 Fungal Infection
+3 Reclamation Sage
+2 Vraska's Contempt
