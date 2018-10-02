@@ -1,25 +1,24 @@
-2 Hallar, the Firefletcher (DAR) 196
-1 Verix Bladewing (DAR) 149
-1 Grand Warlord Radha (DAR) 195
-3 Llanowar Elves (DAR) 168
-3 Shivan Fire (DAR) 142
-3 Bloodstone Goblin (DAR) 115
-3 Elfhame Druid (DAR) 159
-2 Untamed Kavu (DAR) 186
-3 Fight with Fire (DAR) 119
-2 Skizzik (DAR) 145
-2 Grow from the Ashes (DAR) 164
-1 Territorial Allosaurus (DAR) 184
-1 Grunn, the Lonely King (DAR) 165
-1 Ghitu Chronicler (DAR) 125
+1 Carnage Tyrant (XLN) 179
 1 Rootbound Crag (XLN) 256
-1 Memorial to Unity (DAR) 245
-1 Lightning Strike (XLN) 149
+2 Frenzied Raptor (XLN) 146
+3 Lightning Strike (XLN) 149
+2 Raptor Hatchling (XLN) 155
+2 Charging Monstrosaur (XLN) 138
+2 Knight of the Stampede (RIX) 138
+1 Silverclad Ferocidons (RIX) 115
+2 Charging Tuskodon (RIX) 97
+1 Etali, Primal Storm (RIX) 100
+1 Needletooth Raptor (RIX) 107
 1 Banefire (M19) 130
-1 Two-Headed Giant (DAR) 147
-1 Thrashing Brontodon (RIX) 148
-2 Draconic Disciple (M19) 215
-1 Demanding Dragon (M19) 135
-1 Hungering Hydra (M19) 189
-10 Mountain (KLD) 259
-12 Forest (KLD) 262
+4 Timber Gorge (M19) 258
+9 Mountain (M19) 276
+10 Forest (M19) 280
+2 Colossal Majesty (M19) 173
+2 Druid of the Cowl (M19) 177
+3 Elvish Rejuvenator (M19) 180
+1 Goreclaw, Terror of Qal Sisma (M19) 186
+3 Shock (M19) 156
+1 Pelakka Wurm (M19) 192
+3 Draconic Disciple (M19) 215
+3 Llanowar Elves (M19) 314
+

@@ -1,15 +1,16 @@
 inv_logit(x) = 1/(1 + exp(-x))
+softmax(A) = exp.(A) ./ sum(exp.(A))
 
 function wcdraw!(account, pars::PityTimerParameters)::Tuple{Int64,Int64,Int64}
     p = zeros(Float64, 4)
 
-    p[2] = pars.rare_wild_card_base + pars.rare_wild_card_increment * account.pitytimer[3]
-    p[4] = pars.mythic_wild_card_base + pars.mythic_wild_card_increment * account.pitytimer[4]
+    p[2] = pars.rare_wild_card_base + pars.rare_wild_card_increment * max(account.pitytimer[3] - pars.change_point, 0)^pars.ptpower
+    p[4] = pars.mythic_wild_card_base + pars.mythic_wild_card_increment * max(account.pitytimer[4] - pars.change_point,0)^pars.ptpower
 
-    p[1] = pars.rare_proportion * (1 - p[2] - p[4])
-    p[3] = 1 - p[1] - p[2] - p[4]
+    p[1] = pars.rare_card
+    p[3] = pars.mythic_card
 
-    raredraw = rand(Categorical(p))
+    raredraw = rand(Categorical(softmax(p)))
 
     if raredraw == 2
         account.pitytimer[3] = 0

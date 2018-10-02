@@ -26,15 +26,17 @@ Parameters to adjust certain aspects of the simulation:
     pack_vault_pct::Float64 = 0.0
     duplicate_vpct::NTuple{4,Float64} = (1/9, 1/3, 5/9, 1+1/9)
     noopen_cards::Vector{Int} = map(x -> first(x.prints).index, deckinfo(deckreader_mtga_format(joinpath(@__DIR__, "..", "data", "noopen_cards.txt"))))
-    starter_cards::Vector{Int} = startercards
-    bonus_packs::Dict{Symbol,Int} = Dict( :M19 => 13, :DOM => 7 )
+    starter_cards::Vector{Int} = startersequences[1]
+    fixed_starter::Bool = false
+    bonus_packs::Dict{Symbol,Int} = Dict( :GRN => 4, :M19 => 5 )
     nextset::Function = next_set!
     wc_upgrade_rate::Vector{Float64} = [Inf,Inf,Inf,Inf]
     wc_upgrade_threshold::Vector{Int} = [20,20,100,0]
     welcome_bundle::Bool = false
-    kaladesh_grant::Bool = false
     prevent_duplicates::Bool = false
-    starting_wc_count::Vector{Int} = [0,0,0,0]
+    starting_wc_count::Vector{Int} = [8,4,2,1]
+    welcome_bundle_set::Symbol = :M19
+    fixed_pack_track::Cycle{Union{Missing, Symbol}} = Cycle([missing,:GRN,missing,:GRN,missing, :GRN, missing, missing, missing, missing])
 end
 
 """
@@ -50,6 +52,7 @@ for pack-based wildcards, and the position on the wildcard timer tracks
     bonus_packs::Dict{Symbol,Int} = Dict( (s, 0) for s in sets)
     pitytimer::Vector{Int} = [0,0,0,0]
     wc_timer::Cycle{Int} = Cycle(SimParameters().wc_timer_track, 0)
+    fixed_pack_track::Cycle{Union{Missing, Symbol}} = Cycle(SimParameters().fixed_pack_track.data, 0)
 end
 
 function AccountState(parameters::SimParameters)
@@ -61,6 +64,7 @@ function AccountState(parameters::SimParameters)
     end
 
     account.wc_timer = Cycle(parameters.wc_timer_track, 0)
+    account.fixed_pack_track = Cycle(parameters.fixed_pack_track.data,0)
 
     account
 end
@@ -91,22 +95,26 @@ Summarizes simulation output in terms of:
 """
 @with_kw mutable struct SimOutput
     packs_opened::Dict{Symbol,Array{Int,2}}
+    bonus_packs_opened::Dict{Symbol,Array{Int,2}}
     wcs_from_vault::Array{Int,2}
     wcs_spent_on_decks::Array{Int,3}
     card_sources::Array{Float64, 4}
     total_pack_wcs::Array{Int,2}
     total_packs::Vector{Int}
+    total_earned_packs::Vector{Int}
     ending_collection::Array{Int,2}
 end
 
 function SimOutput(reps::Int, decks::Int, sets::Vector{Symbol}, collection::Vector{Int})::SimOutput
     SimOutput(
         packs_opened = Dict( (s, zeros(Int, (reps, decks))) for s in sets),
+        bonus_packs_opened = Dict( (s, zeros(Int, (reps, decks))) for s in sets),
         wcs_from_vault = zeros(Int, (reps, 4)),
         wcs_spent_on_decks = zeros(Int, (reps, decks, 4)),
         card_sources = zeros(Float64, (reps, decks, 4, 9)),
         total_pack_wcs = zeros(Int, (reps, 4)),
         total_packs = zeros(Int, reps),
+        total_earned_packs = zeros(Int, reps),
         ending_collection = zeros(Int, (reps, length(collection)))
     )
 end
@@ -120,10 +128,15 @@ function copy_into_output!(total::SimOutput, partial::SimOutput; startindex::Int
     total.card_sources[range,:,:,:] = partial.card_sources
     total.total_pack_wcs[range,:] = partial.total_pack_wcs
     total.total_packs[range] = partial.total_packs
+    total.total_earned_packs[range] = partial.total_earned_packs
     total.ending_collection[range,:] = partial.ending_collection
 
     for set in keys(total.packs_opened)
         total.packs_opened[set][range,:] = partial.packs_opened[set]
+    end
+
+    for set in keys(total.bonus_packs_opened)
+        total.bonus_packs_opened[set][range,:] = partial.bonus_packs_opened[set]
     end
 
     endindex + 1

@@ -62,6 +62,11 @@ function next_set!(collection, account, current_deck, sets, openable_cards)::Sym
     argmax(set_counter)
 end
 
+function next_set_welcome_bundle!(collection, account, current_deck, sets, openable_cards)::Symbol
+    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards.by_set_rarity )
+    argmax(set_counter)
+end
+
 function next_set_m19!(collection, account, current_deck, sets, openable_cards)::Symbol
     :M19
 end

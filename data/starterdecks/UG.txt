@@ -1,29 +1,22 @@
-1 Kopala, Warden of Waves (XLN) 61
+3 River Heralds' Boon (XLN) 204
+1 Deeproot Champion (XLN) 185
+3 Kumena's Speaker (XLN) 196
+2 Tempest Caller (XLN) 86
+3 Watertrap Weaver (XLN) 87
 1 Herald of Secret Streams (XLN) 59
-1 Hadana's Climb (RIX) 158
-1 Vineshaper Mystic (XLN) 214
-1 Shapers of Nature (XLN) 228
-2 Merfolk Branchwalker (XLN) 197
-2 Kumena's Speaker (XLN) 196
-1 Tempest Caller (XLN) 86
 2 River Sneak (XLN) 70
-2 Silvergill Adept (RIX) 53
-2 Forerunner of the Heralds (RIX) 129
+1 Jadelight Ranger (RIX) 136
+2 Jungleborn Pioneer (RIX) 137
+3 Jade Bearer (RIX) 134
+1 Deeproot Elite (RIX) 127
+1 Kumena, Tyrant of Orazca (RIX) 162
+3 Merfolk Mistbinder (RIX) 164
 1 Seafloor Oracle (RIX) 51
-2 Deeproot Waters (XLN) 51
-1 Tishana's Wayfinder (XLN) 211
-2 Merfolk Trickster (DAR) 56
-2 Merfolk Mistbinder (RIX) 164
-2 Woodland Stream (KLD) 274
-1 Swift Warden (RIX) 146
-2 Mist-Cloaked Herald (RIX) 43
-2 Jade Bearer (RIX) 134
-2 Tatyova, Benthic Druid (DAR) 206
+3 Silvergill Adept (RIX) 53
 1 Hinterland Harbor (DAR) 240
-1 Naturalize (RIX) 139
-1 Mirror Image (M19) 61
-1 Sleep (M19) 74
-1 Mistcaller (M19) 62
-1 Sift (M19) 72
-11 Island (KLD) 253
-10 Forest (KLD) 262
+2 Sleep (M19) 74
+3 Disperse (M19) 50
+4 Woodland Stream (M19) 260
+9 Island (M19) 268
+11 Forest (M19) 280
+

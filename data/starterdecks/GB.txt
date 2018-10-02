@@ -1,27 +1,23 @@
-4 Wildgrowth Walker (XLN) 216
-1 Jadelight Ranger (RIX) 136
-3 Lurking Chupacabra (XLN) 111
-1 Untamed Kavu (DAR) 186
-1 Jungle Creeper (RIX) 161
-1 Ravenous Chupacabra (RIX) 82
-1 Pelakka Wurm (M19) 192
-1 Deadeye Tracker (XLN) 99
-4 Seekers' Squire (XLN) 121
-2 Merfolk Branchwalker (XLN) 197
-1 Tomb Robber (RIX) 87
-2 Tishana's Wayfinder (XLN) 211
-1 Emperor's Vanguard (XLN) 189
-1 Reclamation Sage (M19) 196
-2 Dryad Greenseeker (M19) 178
-2 Golden Demise (RIX) 73
-1 Eviscerate (DAR) 91
-1 Cast Down (DAR) 81
-2 Path of Discovery (RIX) 142
-1 Shadowed Caravel (XLN) 246
-2 Murder (M19) 110
-1 Memorial to Unity (DAR) 245
+2 Costly Plunder (XLN) 96
+1 Path of Discovery (RIX) 142
+1 Tendershoot Dryad (RIX) 147
+1 Twilight Prophet (RIX) 88
 1 Woodland Cemetery (DAR) 248
-4 Foul Orchard (AKH) 279
-1 Memorial to Folly (DAR) 242
-10 Forest (KLD) 262
-8 Swamp (KLD) 256
+1 Verdant Force (DAR) 187
+3 Yavimaya Sapherd (DAR) 189
+1 Slimefoot, the Stowaway (DAR) 205
+2 Spore Swarm (DAR) 180
+3 Saproling Migration (DAR) 178
+3 Deathbloom Thallid (DAR) 84
+1 Torgaar, Famine Incarnate (DAR) 108
+2 Thallid Omnivore (DAR) 106
+1 Rite of Belzenlok (DAR) 102
+3 Fungal Infection (DAR) 94
+3 Vicious Offering (DAR) 110
+1 Whisper, Blood Liturgist (DAR) 111
+3 Doomed Dissenter (M19) 93
+4 Foul Orchard (M19) 251
+10 Swamp (M19) 272
+10 Forest (M19) 280
+3 Poison-Tip Archer (M19) 220
+

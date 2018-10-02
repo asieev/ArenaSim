@@ -1,25 +1,25 @@
-2 Danitha Capashen, Paragon (DAR) 12
-1 Squee, the Immortal (DAR) 146
-1 Blackblade Reforged (DAR) 211
-2 Tiana, Ship's Caretaker (DAR) 208
-3 Valduk, Keeper of the Flame (DAR) 148
-2 On Serra's Wings (DAR) 28
-2 Champion of the Flame (DAR) 116
-2 Luminous Bonds (RIX) 12
-1 Tocatli Honor Guard (XLN) 42
-1 Forebear's Blade (DAR) 214
-3 Skymarcher Aspirant (RIX) 21
-1 Knight of Grace (DAR) 23
-2 Adanto Vanguard (XLN) 1
-2 Sky Terror (XLN) 229
-1 Captain Lannery Storm (XLN) 136
-1 Squire's Devotion (RIX) 25
-2 Short Sword (DAR) 229
-1 Swashbuckling (XLN) 167
+2 Paladin of the Bloodstained (XLN) 25
+1 Kinjalli's Sunwing (XLN) 19
+3 Lightning Strike (XLN) 149
+1 Burning Sun's Avatar (XLN) 135
+1 Captivating Crew (XLN) 137
+2 Martyr of Dusk (RIX) 14
 1 Clifftop Retreat (DAR) 239
-2 Stone Quarry (KLD) 269
-2 Shock (AER) 98
-2 Knight's Pledge (M19) 19
-2 Rustwing Falcon (M19) 36
-10 Mountain (KLD) 259
-11 Plains (KLD) 250
+1 Siege-Gang Commander (DAR) 143
+2 Boggart Brute (M19) 131
+3 Goblin Instigator (M19) 142
+1 Act of Treason (M19) 127
+2 Cavalry Drillmaster (M19) 8
+2 Hieromancer's Cage (M19) 14
+1 Inspired Charge (M19) 15
+3 Leonin Vanguard (M19) 22
+1 Leonin Warleader (M19) 23
+1 Make a Stand (M19) 26
+1 Mentor of the Meek (M19) 27
+3 Militia Bugler (M19) 29
+4 Stone Quarry (M19) 256
+10 Plains (M19) 264
+9 Mountain (M19) 276
+2 Trumpet Blast (M19) 165
+3 Heroic Reinforcements (M19) 217
+

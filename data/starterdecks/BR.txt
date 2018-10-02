@@ -1,27 +1,22 @@
-1 Angrath, the Flame-Chained (RIX) 152
-1 Fell Flagship (XLN) 238
-1 Captain Lannery Storm (XLN) 136
-2 Dire Fleet Captain (XLN) 221
-2 Fiery Cannonade (XLN) 143
-2 Kitesail Freebooter (XLN) 110
-2 Dire Fleet Neckbreaker (RIX) 156
-2 Forerunner of the Coalition (RIX) 72
-1 Reaver Ambush (RIX) 83
-1 Captivating Crew (XLN) 137
-1 Pirate's Cutlass (XLN) 242
-1 Fathom Fleet Captain (XLN) 106
-1 Fathom Fleet Firebrand (XLN) 142
-1 Goblin Trailblazer (RIX) 105
-1 March of the Drowned (XLN) 112
-2 Cinder Barrens (AKH) 280
-3 Fanatical Firebrand (RIX) 101
-1 Storm Fleet Swashbuckler (RIX) 117
-2 Daring Buccaneer (RIX) 98
-2 Grasping Scoundrel (RIX) 74
-2 Rigging Runner (XLN) 157
-2 Lightning Strike (XLN) 149
-2 Murder (M19) 110
-2 Shock (AER) 98
-1 Thud (M19) 163
-9 Swamp (KLD) 256
-12 Mountain (KLD) 259
+1 Dragonskull Summit (XLN) 252
+1 Rekindling Phoenix (RIX) 111
+2 Swab Goblin (RIX) 203
+1 Siege-Gang Commander (DAR) 143
+1 Demon of Catastrophes (M19) 91
+3 Doomed Dissenter (M19) 93
+1 Gravedigger (M19) 98
+2 Blood Divination (M19) 86
+3 Goblin Instigator (M19) 142
+1 Goblin Trashmaster (M19) 144
+3 Murder (M19) 110
+1 Open the Graves (M19) 112
+3 Ravenous Harpy (M19) 115
+2 Reassembling Skeleton (M19) 116
+4 Act of Treason (M19) 127
+4 Cinder Barrens (M19) 248
+10 Swamp (M19) 272
+10 Mountain (M19) 276
+1 Gravewaker (M19) 293
+3 Shock (M19) 156
+3 Brawl-Bash Ogre (M19) 213
+

@@ -1,4 +1,4 @@
-function icrgen_qc(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], rare_icr_probs = [0,0,0.85,0.15])
+function icrgen_qc(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], rare_icr_probs = [0,0,66/100,33/100])
 	first_icr = Dict( (w,uncommon_icr_probs) for w in 0:7)
 	second_icr = deepcopy(first_icr)
 	second_icr[6] = rare_icr_probs
