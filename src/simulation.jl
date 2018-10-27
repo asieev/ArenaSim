@@ -12,6 +12,25 @@ function OpenableCards(x::Vector{Vector{Int}}, y::Dict{Tuple{Symbol,Int},Vector{
     OpenableCards(x,y,deepcopy(x),deepcopy(y),sets)
 end
 
+function update_openables(sets; parameters, db, collection)
+    openables = OpenableCards(
+            map(i -> setdiff( findall(x ->  x["rarity"] == i && in(x["set"], sets), db),
+                              parameters.noopen_cards), 1:4),
+            Dict(
+                ((s,r), setdiff(indices_set_rarity(db,s,r), parameters.noopen_cards)) for s in sets, r in 1:4
+            ), sets
+        )
+
+    if parameters.prevent_duplicates
+        for i in eachindex(collection)
+            if collection[i] >= 4
+                remove_fully_collected!(i; openable_cards = openables)
+            end
+        end
+    end
+
+    openables
+end
 
 """
     simulate(nreps::Int, deckinfos; kwargs...)
@@ -27,24 +46,17 @@ Main simulation function for a fixed deck order, producing a `SimOutput`.
 """
 function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card_db, sets = sets)
     collection = deepcopy(parameters.starter_cards)
-
-    cards_by_rarity = map(i -> indices_rarity(db, i), 1:4)
-    cards_by_set = Dict(map(s -> (s, indices_set(db, s)), sets))
-    cards_by_set_rarity =  Dict(
-     ((s,r), indices_set_rarity(db,s,r)) for s in sets, r in 1:4
-     )
-
-    fresh_openable_cards = OpenableCards(
-        map(i -> setdiff(indices_rarity(db, i), parameters.noopen_cards), 1:4),
-          Dict(
-      ((s,r), setdiff(indices_set_rarity(db,s,r), parameters.noopen_cards)) for s in sets, r in 1:4
-    ), sets)
+    fresh_openable_cards = update_openables(sets; parameters = parameters, db = db, collection = collection)
 
 
 
     account = AccountState(parameters)
 
     output = SimOutput(nreps, length(deckinfos), sets, collection)
+
+    if parameters.track_collection_progress
+        output.collection_progress = Array{Union{Missing,Int}}(missing, nreps, parameters.max_track_progress_packs, length(collection))
+    end
 
     if parameters.welcome_bundle
         account.bonus_packs[parameters.welcome_bundle_set] += 5
@@ -53,6 +65,8 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
     end
 
     freshaccount = deepcopy(account)
+
+    fresh_fixed_pack_track = deepcopy(parameters.fixed_pack_track)
 
     pack_contents = [
         zeros(Int, 5),
@@ -88,6 +102,14 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
         end
         openable_cards = deepcopy(fresh_openable_cards)
 
+        if parameters.kaladesh_grant
+            for i in eachindex(collection)
+                collection[i] += kldgrant[i]
+                if collection[i] > 4
+                    collection[i] = 4
+                end
+            end
+        end
         account = deepcopy(freshaccount)
 
         if parameters.prevent_duplicates
@@ -97,6 +119,8 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
                 end
             end
         end
+
+        parameters.fixed_pack_track = deepcopy(fresh_fixed_pack_track)
 
         for deckindex in eachindex(deckinfos)
             resize!(packs_opened, 0)
@@ -117,7 +141,9 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
                     spend_wildcards!(account = account, collection = collection,
                      current_deck =  current_deck, output = output, rep = rep, deckindex = deckindex,
                      logging_vector = wc_crafts_gained, parameters = parameters, openable_cards = openable_cards)
-                    break
+
+                    @assert !missing_cards(collection, current_deck)
+                    @goto cleanup
                 end
 
                 if any(x -> x < Inf, parameters.wc_upgrade_rate)
@@ -127,6 +153,11 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
                 set = parameters.nextset(collection, account, current_deck, sets, openable_cards)
 
                 if account.bonus_packs[set] == 0
+                    if haskey(parameters.openable_schedule, output.total_earned_packs[rep])
+                        openable_cards = update_openables(parameters.openable_schedule[output.total_earned_packs[rep]]; parameters = parameters,
+                            collection = collection, db = db)
+                    end
+
                     icr_sequence = nextitem!(parameters.icrs_per_pack)
                     for dist in icr_sequence
                         icr_rarity = rand(dist)
@@ -141,6 +172,10 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
 
                     if !ismissing(fixedpack)
                         set = fixedpack
+                    end
+
+                    if !in(set, openable_cards.sets)
+                        set = rand(openable_cards.sets)
                     end
 
                     push!(packs_opened, set)
@@ -169,6 +204,13 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
                   output = output,
                   rep = rep
                 )
+
+                @label cleanup
+
+                if parameters.track_collection_progress
+                    output.collection_progress[rep,output.total_packs[rep],:] = deepcopy(collection)
+                end
+
             end
 
             for packset in packs_opened
@@ -207,6 +249,11 @@ function simulate(nreps::Int, deckinfos; parameters = SimParameters(), db = card
               deckindex = deckindex, column = 9)
         end
         output.ending_collection[rep,:] = collection
+    end
+
+    maxpacks = maximum(output.total_packs)
+    if length(output.collection_progress) > 0 && maxpacks < parameters.max_track_progress_packs
+        output.collection_progress = output.collection_progress[:,1:maxpacks,:]
     end
 
     output
