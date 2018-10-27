@@ -1,7 +1,9 @@
 function remove_fully_collected!(id::Int, set::Symbol, rarity::Int; openable_cards)
     filter!(z -> z != id, openable_cards.by_rarity[rarity])
-    filter!(z -> z != id, openable_cards.by_set_rarity[(set,rarity)])
-
+    if haskey(openable_cards.by_set_rarity, (set,rarity))
+        filter!(z -> z != id, openable_cards.by_set_rarity[(set,rarity)])
+    end
+    
     openable_cards
 end
 
