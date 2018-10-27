@@ -22,21 +22,25 @@ Parameters to adjust certain aspects of the simulation:
 @with_kw mutable struct SimParameters
     pitytimer_distribution::PityTimerSamples = pity_timer_samps
     wc_timer_track::Vector{Int} = [0,0,2,0,0,3,0,0,2,0,0,3,0,0,2,0,0,4,0,0,2,0,0,3,0,0,2,0,0,3]
-    icrs_per_pack::Cycle{Vector{Categorical{Float64}}} = Cycle( [ Categorical{Float64}[], [Categorical( [0,.9,.09,.01])] ] )
+    icrs_per_pack::Cycle{Vector{Categorical{Float64}}} = icrgen_qc(0.5,0,0)
     pack_vault_pct::Float64 = 0.0
     duplicate_vpct::NTuple{4,Float64} = (1/9, 1/3, 5/9, 1+1/9)
     noopen_cards::Vector{Int} = map(x -> first(x.prints).index, deckinfo(deckreader_mtga_format(joinpath(@__DIR__, "..", "data", "noopen_cards.txt"))))
-    starter_cards::Vector{Int} = startersequences[1]
-    fixed_starter::Bool = false
+    starter_cards::Vector{Int} = tenstarters
+    fixed_starter::Bool = true
     bonus_packs::Dict{Symbol,Int} = Dict( :GRN => 4, :M19 => 5 )
     nextset::Function = next_set!
     wc_upgrade_rate::Vector{Float64} = [Inf,Inf,Inf,Inf]
     wc_upgrade_threshold::Vector{Int} = [20,20,100,0]
     welcome_bundle::Bool = false
+    kaladesh_grant::Bool = false
     prevent_duplicates::Bool = false
     starting_wc_count::Vector{Int} = [8,4,2,1]
     welcome_bundle_set::Symbol = :M19
     fixed_pack_track::Cycle{Union{Missing, Symbol}} = Cycle([missing,:GRN,missing,:GRN,missing, :GRN, missing, missing, missing, missing])
+    openable_schedule::Dict{Int,Vector{Symbol}} = Dict{Int,Vector{Symbol}}()
+    track_collection_progress::Bool = false
+    max_track_progress_packs::Int = 500
 end
 
 """
@@ -103,6 +107,7 @@ Summarizes simulation output in terms of:
     total_packs::Vector{Int}
     total_earned_packs::Vector{Int}
     ending_collection::Array{Int,2}
+    collection_progress::Array{Union{Missing,Int},3}
 end
 
 function SimOutput(reps::Int, decks::Int, sets::Vector{Symbol}, collection::Vector{Int})::SimOutput
@@ -115,7 +120,8 @@ function SimOutput(reps::Int, decks::Int, sets::Vector{Symbol}, collection::Vect
         total_pack_wcs = zeros(Int, (reps, 4)),
         total_packs = zeros(Int, reps),
         total_earned_packs = zeros(Int, reps),
-        ending_collection = zeros(Int, (reps, length(collection)))
+        ending_collection = zeros(Int, (reps, length(collection))),
+        collection_progress = Array{Union{Missing,Int}}(missing, 0,0,0)
     )
 end
 
@@ -130,6 +136,10 @@ function copy_into_output!(total::SimOutput, partial::SimOutput; startindex::Int
     total.total_packs[range] = partial.total_packs
     total.total_earned_packs[range] = partial.total_earned_packs
     total.ending_collection[range,:] = partial.ending_collection
+
+    if length(total.collection_progress) > 0 && length(partial.collection_progress) > 0
+        total.collection_progress[range,:,:] = partial.collection_progress
+    end
 
     for set in keys(total.packs_opened)
         total.packs_opened[set][range,:] = partial.packs_opened[set]
