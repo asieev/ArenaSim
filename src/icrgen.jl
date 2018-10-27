@@ -1,4 +1,4 @@
-function icrgen_qc(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], rare_icr_probs = [0,0,66/100,33/100])
+function icrgen_qc(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], rare_icr_probs = [0,0,2/3,1/3])
 	first_icr = Dict( (w,uncommon_icr_probs) for w in 0:7)
 	second_icr = deepcopy(first_icr)
 	second_icr[6] = rare_icr_probs
@@ -24,3 +24,24 @@ function icrgen_qc(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], r
 
 	icrcycle
 end
+
+function icrgen_singleton(winrate, n1, n2;uncommon_icr_probs = [0, 0.85, 0.10, 0.05], rare_icr_probs = [0,0,2/3,1/3])
+	first_icr = Dict( (w,rare_icr_probs) for w in 0:5)
+	second_icr = Dict( (w, uncommon_icr_probs) for w in 0:5)
+
+
+	avg_first_icr = sum( pdfnegbin_truncated(k; p = winrate, r = 2, maxwins = 5) .* first_icr[k] for k in 0:5 )
+	avg_second_icr = sum( pdfnegbin_truncated(k; p = winrate, r = 2, maxwins = 5) .* second_icr[k] for k in 0:5 )
+	if n1 > 0
+		icrvec = [[ Categorical(avg_first_icr), Categorical(avg_second_icr)] for i in 1:n1]
+		for i in 1:n2
+			push!(icrvec, Categorical{Float64}[])
+		end
+		icrcycle = Cycle(  icrvec )
+	else
+		icrcycle = Cycle( [Categorical{Float64}[]] )
+	end
+
+	icrcycle
+end
+
