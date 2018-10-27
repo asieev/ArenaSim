@@ -58,12 +58,53 @@ function next_set!(collection, account, current_deck, sets, openable_cards)::Sym
         end
     end
 
-    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards.by_set_rarity )
+    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards )
     argmax(set_counter)
 end
 
+function next_set_duplicates!(collection, account, current_deck, sets, openable_cards)::Symbol
+    for set in sets
+        if account.bonus_packs[set] > 0
+            return set
+        end
+    end
+
+    best = openable_cards.sets[1]
+    bestpct = 0.0
+    for set in openable_cards.sets
+        count = 0
+        total = length(openable_cards.by_set_rarity[(set,3)])
+
+        for i in openable_cards.by_set_rarity[(set,3)]
+            if collection[i] >= 4
+                count += 1
+            end
+        end
+
+        if count / total > bestpct
+            best = set
+            bestpct = count / total
+        end
+    end
+
+    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards )
+    if bestpct > 0.25
+        best
+    else
+        argmax(set_counter)
+    end
+end
+
+function next_set_kld!(collection, account, current_deck, sets, openable_cards)::Symbol
+    if in(:KLD, openable_cards.sets)
+        :KLD
+    else
+        last(openable_cards.sets)
+    end
+end
+
 function next_set_welcome_bundle!(collection, account, current_deck, sets, openable_cards)::Symbol
-    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards.by_set_rarity )
+    count_sets_with_high_rarity!(set_counter, collection, current_deck, openable_cards )
     argmax(set_counter)
 end
 
@@ -75,16 +116,24 @@ function next_set_dom!(collection, account, current_deck, sets, openable_cards):
     :DOM
 end
 
-function count_sets_with_high_rarity!(d::Dict{Symbol,Float64}, collection, deck, length_lookup)
+function next_set_xln!(collection, account, current_deck, sets, openable_cards)::Symbol
+    :XLN
+end
+
+function next_set_grn!(collection, account, current_deck, sets, openable_cards)::Symbol
+    :GRN
+end
+
+function count_sets_with_high_rarity!(d::Dict{Symbol,Float64}, collection, deck, openable_cards, rarity = 3)
     for k in keys(d)
         d[k] = 0.0
     end
 
     for elem in deck
         for print in elem.prints
-            if print.rarity >= 3
+            if print.rarity == rarity && in(print.set, openable_cards.sets)
                 d[print.set] += max(0.0, elem.amount - sum_over_prints(collection, elem.prints)) /
-                   (length(length_lookup[(print.set, 3)]) + length(length_lookup[(print.set, 4)]))
+                   (length(openable_cards.by_set_rarity[(print.set, rarity)]))
             end
         end
     end
