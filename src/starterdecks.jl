@@ -1,4 +1,4 @@
-function starterdeckreader(dualcolors)
+function starterdeckreader(dualcolors)::Vector{Int}
     monos = ["W","U","B","R","G"] .* ".txt"
     duals = dualcolors .* ".txt"
     files = vcat(monos, duals)
@@ -25,6 +25,8 @@ const startersequences = Vector{Int}[
    starterdeckreader( ["RG", "GB", "UB", "UW", "WR"] )
 ]
 
+const tenstarters = starterdeckreader( ["RG", "GB", "UB", "UW", "WR", "BW", "UR", "BR", "GW", "UG"])
+
 
 const basiccards = let
     dir = joinpath(@__DIR__, "..", "data", "starterdecks")
@@ -43,4 +45,33 @@ const basiccards = let
         end
     end
     col
+end
+
+
+const kldgrant = let
+    file = joinpath(@__DIR__, "..", "data", "KLD_starter", "kld_starter.txt" )
+    deck = deckreader_mtga_format( file )
+    deck = deckinfo(deck)
+    
+    col = array_rep_all(card_db)
+    for elem in deck
+        ix = first(elem.prints).index
+        col[ix] += elem.amount
+    end
+
+    for r in 1:4
+        for s in [:KLD, :AER]
+            for ix in indices_set_rarity(card_db, s, r)
+                col[ix] += r > 3 ? 1 : 2
+            end
+        end
+    end
+    
+    for i in eachindex(col)
+        if col[i] > 4
+            col[i] = 4
+        end
+    end
+    col
+    
 end
